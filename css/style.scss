@@ -1,0 +1,85 @@
+@charset "utf-8";
+*{
+    margin:0;
+    padding: 0;
+}
+li{
+    list-style: none;
+}
+@mixin common($color){
+    width: 100%;
+    height:200px;
+    margin: 0 auto;
+    background:$color;
+    font-size: 30px;
+    line-height: 150px;
+    text-align: center;
+    font-weight: 900;
+}
+#header{
+    @include common(skyblue);
+}
+#footer{
+    @include common(skyblue);
+}
+#main{
+    img{
+        height: 500px;
+        width: 100%;
+        display: block;
+        box-shadow:0px 0px 5px #C1C1C1;
+        margin: 0 auto;
+    }
+}
+#LoutiNav{
+    position:fixed;
+    left: 30px;
+    top:90px;
+    border: 1px solid #fff;
+    ul{
+        li{
+            height: 40px;
+            width: 50px;
+            text-align: center;
+            line-height: 40px;
+            border-bottom: 1px dashed #fff;
+            color:#fff;
+            cursor: pointer;
+            span{
+                display: none;
+            }
+        }
+        li{
+            position: relative;
+            .active{
+                height: 40px;
+                width: 110px;
+                background:#C3C3C3;
+                display: block;
+                position: absolute;
+                border: 1px solid #000;
+                border-left:0;
+                left:0;
+                top:-1px;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

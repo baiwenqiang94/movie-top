@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/style.css" />
+		<script src="js/jquery-1.11.1.js"></script>
+	</head>
+
+	<body>
+		<div id="LoutiNav">
+			<ul>
+				<li>Top1 <span>霸王别姬</span> </li>
+				<li>Top2 <span>男朋友。女朋友</span> </li>
+				<li>Top3 <span>忠犬八公</span> </li>
+				<li>Top4 <span>断背山</span> </li>
+				<li>Top5 <span>可可西里</span> </li>
+				<li>Top6 <span>暹罗之恋 </span> </li>
+				<li>Top7 <span>天佑鲍比</span> </li>
+				<li>Top8 <span>泰坦尼克号</span> </li>
+				<li>Top9 <span>无间道</span> </li>
+				<li>Top10 <span>春光乍泄</span> </li>
+				<li class="last">Top</li>
+			</ul>
+		</div>
+
+		<!--楼层内容开始-->
+		<div id="header">经典电影Top10</div>
+		<div id="main">
+			<img src="img/bwbj.jpg" />
+			<img src="img/bg.jpg" />
+			<img src="img/zqbg.jpg" />
+			<img src="img/dbs.jpg" />
+			<img src="img/kkxl.jpg" />
+			<img src="img/xlzl.jpg" />
+			<img src="img/bobby.jpg" />
+			<img src="img/tatnic.jpg" />
+			<img src="img/wjd.jpg" />
+			<img src="img/cgzx.jpg" />
+		</div>
+		<div id="footer">纯属个人排名,嘿嘿嘿</div>
+	</body>
+
+</html>
+
+<script>
+	//点击楼层号显示相应的楼层
+	var flag = true;//假设值为true时  可以触发滚动条
+	$("#LoutiNav li").not(".last").click(function(){
+		flag = false;
+		$(this).find("span")
+			   .addClass("active")
+			   .end()
+			   .siblings()
+			   .find("span")
+			   .removeClass("active")
+	    var index = $(this).index();//记录当前操作的对象下标
+	    var t = $("img").eq(index).offset().top-95;
+		$("body,html").animate({scrollTop:t},1000,function(){
+			flag = true;
+		})
+	})
+	//点击top回到顶部
+	$("#LoutiNav li").last().click(function(){
+		$("body,html").animate({scrollTop : 0},1000);
+	})
+	//触发滚动条，显示相应的楼层号
+	$(window).scroll(function(){
+		if( flag ){
+			var sTop = $(document).scrollTop();
+			//遍历所有楼层  找到在可视区最高的楼层  
+			// 这个楼层满足 :abs(楼层的top值-页面滚走的距离)<楼层高度的一半
+			$floor = $("img").filter( function(){
+				//返回满足某个条件的楼层
+				return Math.abs( $(this).offset().top-sTop ) < $(this).height()/2;
+			} )
+			var index = $floor.index();
+			if( index!=-1 ){
+			//根据index找到对应的楼层号
+			$("#LoutiNav li:not(.last)").eq(index)
+								        .find("span")
+								        .addClass("active")
+								        .end()
+								        .siblings()
+								        .find("span")
+								        .removeClass("active");
+			}
+			//当页面滚走的距离小于某个值时  把第一个楼层号的样式清除
+			if( sTop < 100 ){
+				$("#LoutiNav li:not(.last)").eq(0).find("span").removeClass("active");
+			}
+		}
+	})
+	
+	
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
